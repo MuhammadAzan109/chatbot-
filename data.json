@@ -1,0 +1,118 @@
+{
+    "intents": [
+      {
+        "tag": "greeting",
+        "patterns": [
+          "Hi",
+          "Hello",
+          "How are you?",
+          "Is anyone there?",
+          "Good day"
+        ],
+        "responses": [
+          "Hello! How can I assist you today?",
+          "Hi there, how can I help?",
+          "Good day! How can I help you?"
+        ]
+      },
+      {
+        "tag": "product_price",
+        "patterns": [
+          "Can you tell me the price of product X?",
+          "What is the cost of product Y?",
+          "How much does product Z cost?",
+          "I need the price for product X"
+        ],
+        "responses": [
+          "The price for product X is $49.99.",
+          "Product Y costs $29.99.",
+          "The price of product Z is $99.99. Would you like to know more?"
+        ]
+      },
+      {
+        "tag": "inquiry_shipping",
+        "patterns": [
+          "What are the shipping options?",
+          "Do you offer free shipping?",
+          "How much is shipping?",
+          "Can you tell me about shipping fees?"
+        ],
+        "responses": [
+          "We offer free shipping for orders over $50.",
+          "Standard shipping costs $5.99, and express shipping is $12.99.",
+          "Shipping is free for all orders over $50, otherwise a small fee is applied."
+        ]
+      },
+      {
+        "tag": "discounts_offers",
+        "patterns": [
+          "Are there any discounts?",
+          "Do you have any offers?",
+          "What promotions are available?",
+          "Is there a sale right now?"
+        ],
+        "responses": [
+          "We are currently offering 20% off on all electronics.",
+          "Yes, there is a 10% discount for new customers!",
+          "We have a buy one get one free offer on selected products. Check it out!"
+        ]
+      },
+      {
+        "tag": "return_policy",
+        "patterns": [
+          "Can I return a product?",
+          "What is your return policy?",
+          "How do I return a product?",
+          "Is there a return option?"
+        ],
+        "responses": [
+          "Yes, you can return products within 30 days of purchase with a receipt.",
+          "Our return policy allows returns within 30 days of purchase. Make sure the item is in its original condition.",
+          "To return a product, simply contact our support team and provide your order details."
+        ]
+      },
+      {
+        "tag": "delivery_time",
+        "patterns": [
+          "How long does delivery take?",
+          "When will my order arrive?",
+          "What is the estimated delivery time?",
+          "How fast is shipping?"
+        ],
+        "responses": [
+          "Delivery typically takes 3-5 business days for standard shipping.",
+          "Express shipping will deliver your package within 1-2 business days.",
+          "You can expect your order to arrive within 3-5 days."
+        ]
+      },
+      {
+        "tag": "thanks",
+        "patterns": [
+          "Thanks",
+          "Thank you",
+          "Thanks a lot",
+          "Thank you so much"
+        ],
+        "responses": [
+          "You're welcome!",
+          "Happy to help!",
+          "Glad I could assist you!"
+        ]
+      },
+      {
+        "tag": "goodbye",
+        "patterns": [
+          "Goodbye",
+          "See you later",
+          "Bye",
+          "Talk to you soon"
+        ],
+        "responses": [
+          "Goodbye! Have a great day.",
+          "See you soon! Take care.",
+          "Bye! Let me know if you need any further help."
+        ]
+      }
+    ]
+  }
+  

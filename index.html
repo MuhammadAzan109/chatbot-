@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        /* Chatbox container */
+        #chatbox {
+            width: 80%;
+            max-width: 600px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            height: 500px;
+            overflow-y: hidden;
+        }
+
+        /* Message container */
+        #messages {
+            flex-grow: 1;
+            margin-bottom: 15px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        /* Individual message styling */
+        .message {
+            margin-bottom: 12px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            max-width: 75%;
+            word-wrap: break-word;
+        }
+
+        /* User messages alignment */
+        .message.user {
+            align-self: flex-end;
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        /* Bot messages alignment */
+        .message.bot {
+            align-self: flex-start;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        /* Input section */
+        #input {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Input text area */
+        #input textarea {
+            flex-grow: 1;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            resize: none;
+            font-size: 16px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Send button */
+        #input button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Hover effect for send button */
+        #input button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Scrollbar styling */
+        #messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        #messages::-webkit-scrollbar-thumb {
+            background-color: #ccc;
+            border-radius: 3px;
+        }
+
+        #messages::-webkit-scrollbar-thumb:hover {
+            background-color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div id="chatbox">
+        <div id="messages"></div>
+        <div id="input">
+            <textarea id="message" placeholder="Type a message..."></textarea>
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <!-- Link to external JavaScript file -->
+    <script>
+        function appendMessage(message, type) {
+    const messagesDiv = document.getElementById('messages');
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add('message', type);
+    messageDiv.textContent = message;
+    messagesDiv.appendChild(messageDiv);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+
+function sendMessage() {
+    const messageInput = document.getElementById('message');
+    const userMessage = messageInput.value;
+    if (userMessage.trim() === '') return;
+
+    appendMessage(userMessage, 'user');
+    messageInput.value = '';
+
+    fetch('http://127.0.0.1:5001/get', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+            'msg': userMessage
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        appendMessage(data.response, 'bot');
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+// Ensure this listener is outside the sendMessage function
+document.getElementById('message').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+    }
+});
+
+    </script>
+</body>
+</html>
